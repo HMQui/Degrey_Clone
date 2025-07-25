@@ -20,76 +20,68 @@
             <nav class="w-1/2 flex items-center justify-center">
                 <ul class="flex items-center justify-center m-0 p-0 list-none h-full">
                     <li class="group h-full flex items-center justify-center text-base cursor-pointer">
-                        <a href="index.php?pg=products&category=all&gender=female" class="h-full flex items-center justify-center px-[15px]">Nữ | Women</a>
+                        <a href="index.php?pg=products&page=1&gender=female" class="h-full flex items-center justify-center px-[15px]">Nữ | Women</a>
 
                         <!-- Sub menu -->
                         <div class="absolute left-0 top-[80px] w-full bg-white py-4 z-[999] invisible group-hover:visible transition-all duration-300 opacity-0 group-hover:opacity-100 shadow-xl">
                             <ul class="max-w-[1280px] mx-auto flex justify-center flex-wrap">
                                 <li class="px-[15px] w-2/12">
                                     <a class="text-black text-base mb-[10px] block"
-                                        href="index.php?pg=products&category=all&gender=female">Tất cả | All</a>
+                                        href="index.php?pg=products&page=1&gender=female">Tất cả | All</a>
                                 </li>
                                 <li class="px-[15px] w-2/12">
                                     <a class="text-black text-base mb-[10px] block"
-                                        href="index.php?pg=products&category=tshirt&gender=female">Áo thun | Tshirt</a>
+                                        href="index.php?pg=products&page=1&category=tshirt&gender=female">Áo thun | Tshirt</a>
                                 </li>
                                 <li class="px-[15px] w-2/12">
                                     <a class="text-black text-base mb-[10px] block"
-                                        href="index.php?pg=products&category=jacket&gender=female">Áo khoác | Jackets</a>
+                                        href="index.php?pg=products&page=1&category=jacket&gender=female">Áo khoác | Jackets</a>
                                 </li>
                                 <li class="px-[15px] w-2/12">
                                     <a class="text-black text-base mb-[10px] block"
-                                        href="index.php?pg=products&category=long-sleeves&gender=female">Áo tay dài | Long sleeves</a>
+                                        href="index.php?pg=products&page=1&category=long-sleeves&gender=female">Áo tay dài | Long sleeves</a>
                                 </li>
                                 <li class="px-[15px] w-2/12">
                                     <a class="text-black text-base mb-[10px] block"
-                                        href="index.php?pg=products&category=tanktop&gender=female">Áo ba lỗ | Tank tops</a>
+                                        href="index.php?pg=products&page=1&category=tanktop&gender=female">Áo ba lỗ | Tank tops</a>
                                 </li>
                                 <li class="px-[15px] w-2/12">
                                     <a class="text-black text-base mb-[10px] block"
-                                        href="index.php?pg=products&category=sports-bras&gender=female">Áo thể thao | Sports Bras</a>
-                                </li>
-                                <li class="px-[15px] w-2/12">
-                                    <a class="text-black text-base mb-[10px] block"
-                                        href="index.php?pg=products&category=pants-shorts&gender=female">Quần | Pants & Shorts</a>
-                                </li>
-                                <li class="px-[15px] w-2/12">
-                                    <a class="text-black text-base mb-[10px] block"
-                                        href="index.php?pg=products&category=sport-skirts&gender=female">Váy | Sports Skirts</a>
+                                        href="index.php?pg=products&page=1&category=pants-shorts&gender=female">Quần | Pants & Shorts</a>
                                 </li>
                             </ul>
                         </div>
 
                     </li>
                     <li class="group h-full flex items-center justify-center text-base cursor-pointer">
-                        <a href="index.php?pg=products&category=all&gender=male" class="h-full flex items-center justify-center px-[15px]">Nam | Men</a>
+                        <a href="index.php?pg=products&page=1&gender=male" class="h-full flex items-center justify-center px-[15px]">Nam | Men</a>
 
                         <!-- Sub menu -->
                         <div class="absolute left-0 top-[80px] w-full bg-white py-4 z-[999] invisible group-hover:visible transition-all duration-300 opacity-0 group-hover:opacity-100  shadow-xl">
                             <ul class="max-w-[1280px] mx-auto flex justify-center flex-wrap">
                                 <li class="px-[15px] w-2/12">
                                     <a class="text-black text-base mb-[10px] block"
-                                        href="index.php?pg=products&category=all&gender=male">Tất cả | All</a>
+                                        href="index.php?pg=products&page=1&category=all&gender=male">Tất cả | All</a>
                                 </li>
                                 <li class="px-[15px] w-2/12">
                                     <a class="text-black text-base mb-[10px] block"
-                                        href="index.php?pg=products&category=tshirt&gender=male">Áo thun | Tshirt</a>
+                                        href="index.php?pg=products&page=1&category=tshirt&gender=male">Áo thun | Tshirt</a>
                                 </li>
                                 <li class="px-[15px] w-2/12">
                                     <a class="text-black text-base mb-[10px] block"
-                                        href="index.php?pg=products&category=tanktop&gender=male">Áo ba lỗ | Tank tops</a>
+                                        href="index.php?pg=products&page=1&category=tanktop&gender=male">Áo ba lỗ | Tank tops</a>
                                 </li>
                                 <li class="px-[15px] w-2/12">
                                     <a class="text-black text-base mb-[10px] block"
-                                        href="index.php?pg=products&category=jacket&gender=male">Áo khoác | Jackets</a>
+                                        href="index.php?pg=products&page=1&category=jacket&gender=male">Áo khoác | Jackets</a>
                                 </li>
                                 <li class="px-[15px] w-2/12">
                                     <a class="text-black text-base mb-[10px] block"
-                                        href="index.php?pg=products&category=long-sleeves&gender=male">Áo tay dài | Long sleeves</a>
+                                        href="index.php?pg=products&page=1&category=long-sleeves&gender=male">Áo tay dài | Long sleeves</a>
                                 </li>
                                 <li class="px-[15px] w-2/12">
                                     <a class="text-black text-base mb-[10px] block"
-                                        href="index.php?pg=products&category=pants-shorts&gender=male">Quần | Pants & Shorts</a>
+                                        href="index.php?pg=products&page=1&category=pants-shorts&gender=male">Quần | Pants & Shorts</a>
                                 </li>
                             </ul>
                         </div>
@@ -102,19 +94,16 @@
                         <div class="absolute left-0 top-[80px] w-full bg-white py-4 z-[999] invisible group-hover:visible transition-all duration-300 opacity-0 group-hover:opacity-100  shadow-xl">
                             <ul class="max-w-[1280px] mx-auto flex justify-center flex-wrap">
                                 <li class="px-[15px] w-2/12">
-                                    <a class="text-black text-base mb-[10px] block" href="index.php?pg=products&category=backpack">Balo | Backpacks</a>
+                                    <a class="text-black text-base mb-[10px] block" href="index.php?pg=products&page=1&category=backpack">Balo | Backpacks</a>
                                 </li>
                                 <li class="px-[15px] w-2/12">
-                                    <a class="text-black text-base mb-[10px] block" href="index.php?pg=products&category=handbag">Túi xách | Handbags</a>
+                                    <a class="text-black text-base mb-[10px] block" href="index.php?pg=products&page=1&category=handbag">Túi xách | Handbags</a>
                                 </li>
                                 <li class="px-[15px] w-2/12">
-                                    <a class="text-black text-base mb-[10px] block" href="index.php?pg=products&category=cap">Nón | Caps</a>
+                                    <a class="text-black text-base mb-[10px] block" href="index.php?pg=products&page=1&category=cap">Nón | Caps</a>
                                 </li>
                                 <li class="px-[15px] w-2/12">
-                                    <a class="text-black text-base mb-[10px] block" href="index.php?pg=products&category=cosmetic">Mỹ phẩm | Cosmetics</a>
-                                </li>
-                                <li class="px-[15px] w-2/12">
-                                    <a class="text-black text-base mb-[10px] block" href="index.php?pg=products&category=shoes_sandal">Giày &amp; Dép | Shoes &amp; Sandals</a>
+                                    <a class="text-black text-base mb-[10px] block" href="index.php?pg=products&page=1&category=shoes-sandal">Giày &amp; Dép | Shoes &amp; Sandals</a>
                                 </li>
                             </ul>
 
@@ -264,12 +253,12 @@
                         </div>
                         <div class="mt-4 hidden w-full">
                             <p class="text-base mb-2">Gợi ý cho bạn:</p>
-                            <a class="ml-5 text-black text-lg block" href="index.php?pg=products&category=tshirt&gender=male">Nam | T-shirt</a>
-                            <a class="ml-5 text-black text-lg block" href="index.php?pg=products&category=tshirt&gender=female">Nữ | T-shirt</a>
+                            <a class="ml-5 text-black text-lg block" href="index.php?pg=products&page=1&category=tshirt&gender=male">Nam | T-shirt</a>
+                            <a class="ml-5 text-black text-lg block" href="index.php?pg=products&page=1&category=tshirt&gender=female">Nữ | T-shirt</a>
                         </div>
 
                         <!-- List product -->
-                        <div class="product-list">
+                        <div class="product-list max-h-[500px] overflow-y-auto">
 
                         </div>
                     </div>

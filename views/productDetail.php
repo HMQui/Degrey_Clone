@@ -40,9 +40,9 @@
             <section class="md:mt-6 mt-2 hidden md:flex justify-start items-center gap-3 w-full">
                 <a class="text-[13px]" href="index.php?pg=home">Trang chủ</a>
                 <span class="text-[13px] text-[#777777]">/</span>
-                <a class="text-[13px]" href="index.php?pg=products&gender=female">ÁO</a>
-                <span class="text-[13px] text-[#777777]">/</span>
-                <p class="text-[13px] text-[#777777]">Áo thun tay dài màu CAM TIGER Degrey Jersey long sleeve cổ tim thời trang thể thao - LONGTIGER</p>
+                <p class="text-[13px] text-[#777777]">
+                    <?= htmlspecialchars($product['name']) ?>
+                </p>
             </section>
 
             <!-- Product -->
@@ -60,10 +60,12 @@
                         <div id="dotsContainer" class="flex space-x-2 mt-3 absolute left-1/2 bottom-[20px] transform -translate-x-1/2"></div>
 
                         <!-- Sale off -->
-                        <div class="absolute top-1 left-1 w-12 h-12 bg-red-600 flex flex-col justify-center items-center text-white text-[13px] rounded-b-xl">
-                            <span>-11%</span>
-                            <span>OFF</span>
-                        </div>
+                        <?php if (!empty($product['discount_percent']) && $product['discount_percent'] > 0): ?>
+                            <div class="absolute top-1 left-1 w-12 h-12 bg-red-600 flex flex-col justify-center items-center text-white text-[13px] rounded-b-xl">
+                                <span>-<?= intval($product['discount_percent']) ?>%</span>
+                                <span>OFF</span>
+                            </div>
+                        <?php endif; ?>
                     </div>
 
                     <!-- Sub images mobile -->
@@ -75,20 +77,45 @@
                     <h1 class="text-2xl font-bold">Áo thun tay dài màu CAM TIGER Degrey Jersey long sleeve cổ tim thời trang thể thao - LONGTIGER</h1>
                     <!-- Price -->
                     <div class="ml-3 mt-6 flex justify-start items-center">
-                        <!-- Sale off -->
-                        <span class="px-4 py-1 bg-orange-600 text-white text-[13px] font-semibold">11%</span>
-                        <span class="ml-0 line-through text-lg text-[#878c8f]">450,000đ</span>
-                        <span class="text-2xl text-orange-600 ml-4 font-bold">400,000đ</span>
+                        <?php if (!empty($product['discount_percent']) && $product['discount_percent'] > 0):
+                            $discountPrice = $product['price'] * (100 - $product['discount_percent']) / 100;
+                        ?>
+                            <!-- Sale off badge -->
+                            <span class="px-4 py-1 bg-orange-600 text-white text-[13px] font-semibold">
+                                -<?= intval($product['discount_percent']) ?>%
+                            </span>
+                            <!-- Original price -->
+                            <span class="ml-0 line-through text-lg text-[#878c8f]">
+                                <?= number_format($product['price'], 0, ',', '.') ?>đ
+                            </span>
+                            <!-- Discounted price -->
+                            <span class="text-2xl text-orange-600 ml-4 font-bold">
+                                <?= number_format($discountPrice, 0, ',', '.') ?>đ
+                            </span>
+                        <?php else: ?>
+                            <!-- Only original price -->
+                            <span class="text-2xl text-black font-bold">
+                                <?= number_format($product['price'], 0, ',', '.') ?>đ
+                            </span>
+                        <?php endif; ?>
                     </div>
                     <!-- Size options -->
                     <div class="mt-6 flex items-center">
                         <span class="text-sm">SIZE:</span>
                         <div id="sizeOptions" class="ml-30 flex space-x-3">
-                            <button class="size-btn selected">S</button>
-                            <button class="size-btn">M</button>
-                            <button class="size-btn">L</button>
+                            <?php
+                            if (count($quantiyFollowSize) == 3) {
+                                echo '<button class="size-btn selected">S</button>';
+                                echo '<button class="size-btn">M</button>';
+                                echo '<button class="size-btn">L</button>';
+                            } else {
+                                $sizeName = $quantiyFollowSize[0]['size'];
+                                echo '<button class="">' . htmlspecialchars($sizeName) . '</button>';
+                            }
+                            ?>
                         </div>
                     </div>
+
                     <hr class="my-5 w-full border-gray-300">
                     <div class="grid grid-cols-3 w-full gap-3">
                         <a href="https://facebook.com" class="px-3 py-3 col-span-1 bg-[#ebece8a6] flex justify-center items-center gap-1">
@@ -116,9 +143,16 @@
                         <div id="textInfo" class="overflow-hidden max-h-0 opacity-0 transition-all duration-500 ease-in-out">
                             <div class="w-full pt-2 flex justify-start items-center">
                                 <div class="text-sm flex flex-col justify-start items-start gap-1 text-gray-700">
-                                    <p>- Chất liệu: vải lưới</p>
-                                    <p>- Họa tiết: &nbsp;in chuyển nhiệt trực tiếp lên vải</p>
-                                    <p>- Size: S/M/L</p>
+                                    <p>- Chất liệu: <?= htmlspecialchars($product['material']) ?></p>
+                                    <p>- Họa tiết: <?= htmlspecialchars($product['pattern']) ?></p>
+                                    <p>- Size: <?php
+                                                if (count($quantiyFollowSize) == 3) {
+                                                    echo 'S/M/L';
+                                                } else {
+                                                    $sizeName = $quantiyFollowSize[0]['size'];
+                                                    echo htmlspecialchars($sizeName);
+                                                }
+                                                ?></p>
                                     <p>- Thương hiệu: Degrey</p>
                                     <p>- Sản xuất: Việt Nam</p>
                                     <p>- Màu sắc và họa tiết được thiết kế riêng bởi team design DEGREY</p>
@@ -185,67 +219,157 @@
             <section class="mt-10 flex flex-col justify-center items-center">
                 <h1 class="text-2xl text-center font-bold mb-5">SẢN PHẨM LIÊN QUAN</h1>
 
-                <!-- List products -->
+                <!-- List products (Large screen - 5 items) -->
                 <div class="grid-cols-5 gap-2 lg:grid hidden">
                     <?php
-                    for ($i = 0; $i < 5; $i++) {
+                    for ($i = 0; $i < min(5, count($relativeProducts)); $i++) {
+                        $p = $relativeProducts[$i];
+                        $images = explode(',', $p['images']);
+                        $img1 = isset($images[0]) ? $images[0] : '';
+                        $img2 = isset($images[1]) ? $images[1] : $images[0];
+
+                        $price = number_format($p['price'], 0, ',', '.');
+                        $discountPrice = null;
+                        if (!empty($p['discount_percent']) && $p['discount_percent'] > 0) {
+                            $discountPrice = number_format($p['price'] * (1 - $p['discount_percent'] / 100), 0, ',', '.');
+                        }
                         echo '
-                <a href="index.php?pg=products&id=1" class="group space-y-2 hover:shadow-xs">
-                    <div class="relative w-full aspect-square overflow-hidden">
-                        <img src="public/assets/images/products/T-shirtFemale1-1.jpg"
-                            alt=""
-                            class="absolute inset-0 w-[362px] h-[362px] lg:w-[220px] lg:h-[220px] object-cover transition-opacity duration-300 group-hover:opacity-0" />
-                        <img src="public/assets/images/products/T-shirtFemale1-2.jpg"
-                            alt=""
-                            class="absolute inset-0 w-[362px] h-[362px] lg:w-[220px] lg:h-[220px] object-cover transition-opacity duration-300 opacity-0 group-hover:opacity-100" />
-                    </div>
-                    <div class="px-2 pb-3 space-y-2">
-                        <p class="text-sm leading-snug line-clamp-2">
-                            Áo thun tay dài màu CAM TIGER Degrey Jersey long sleeve cổ tim thời trang thể thao
-                        </p>
-                        <div class="flex justify-start items-center gap-3 text-sm">
-                            <span class="font-semibold text-black">400,000đ</span>
-                            <span class="line-through text-gray-400">450,000đ</span>
-                        </div>
-                    </div>
-                </a>
-            ';
+                        <a href="index.php?pg=products&id=' . $p['id'] . '" class="group space-y-2 hover:shadow-xs">
+                            <div class="relative w-full aspect-square overflow-hidden">
+                                <img src="public/assets/images/products/' . $img1 . '"alt="" class="absolute inset-0 w-[362px] h-[362px] lg:w-[220px] lg:h-[220px] object-cover transition-opacity duration-300 group-hover:opacity-0" />
+                                <img src="public/assets/images/products/' . $img2 . '" alt="" class="absolute inset-0 w-[362px] h-[362px] lg:w-[220px] lg:h-[220px] object-cover transition-opacity duration-300 opacity-0 group-hover:opacity-100" />
+                            </div>
+                            <div class="px-2 pb-3 space-y-2">
+                                <p class="text-sm leading-snug line-clamp-2">' . htmlspecialchars($p['name']) . '</p>
+                            <div class="flex justify-start items-center gap-3 text-sm">';
+                        if ($discountPrice) {
+                            echo '<span class="font-semibold text-black">' . $discountPrice . 'đ</span>';
+                            echo '<span class="line-through text-gray-400">' . $price . 'đ</span>';
+                        } else {
+                            echo '<span class="font-semibold text-black">' . $price . 'đ</span>';
+                        }
+                        echo '</div>
+                            </div>
+                        </a>';
                     }
                     ?>
                 </div>
+
+                <!-- List products (Small screen - 6 items) -->
                 <div class="grid grid-cols-2 gap-3 lg:hidden">
                     <?php
-                    for ($i = 0; $i < 6; $i++) {
+                    for ($i = 0; $i < min(6, count($relativeProducts)); $i++) {
+                        $p = $relativeProducts[$i];
+                        $images = explode(',', $p['images']);
+                        $img1 = isset($images[0]) ? $images[0] : '';
+                        $img2 = isset($images[1]) ? $images[1] : $images[0];
+
+                        $price = number_format($p['price'], 0, ',', '.');
+                        $discountPrice = null;
+                        if (!empty($p['discount_percent']) && $p['discount_percent'] > 0) {
+                            $discountPrice = number_format($p['price'] * (1 - $p['discount_percent'] / 100), 0, ',', '.');
+                        }
                         echo '
-                <a href="index.php?pg=products&id=1" class="group space-y-2 hover:shadow-xs">
-                    <div class="relative w-full aspect-square overflow-hidden">
-                        <img src="public/assets/images/products/T-shirtFemale1-1.jpg"
-                            alt=""
-                            class="absolute inset-0 w-[362px] h-[362px] lg:w-[220px] lg:h-[220px] object-cover transition-opacity duration-300 group-hover:opacity-0" />
-                        <img src="public/assets/images/products/T-shirtFemale1-2.jpg"
-                            alt=""
-                            class="absolute inset-0 w-[362px] h-[362px] lg:w-[220px] lg:h-[220px] object-cover transition-opacity duration-300 opacity-0 group-hover:opacity-100" />
-                    </div>
-                    <div class="px-2 pb-3 space-y-2">
-                        <p class="text-sm leading-snug line-clamp-2">
-                            Áo thun tay dài màu CAM TIGER Degrey Jersey long sleeve cổ tim thời trang thể thao
-                        </p>
-                        <div class="flex justify-start items-center gap-3 text-sm">
-                            <span class="font-semibold text-black">400,000đ</span>
-                            <span class="line-through text-gray-400">450,000đ</span>
-                        </div>
-                    </div>
-                </a>
-            ';
+                        <a href="index.php?pg=products&id=' . $p['id'] . '" class="group space-y-2 hover:shadow-xs">
+                            <div class="relative w-full aspect-square overflow-hidden">
+                                <img src="public/assets/images/products/' . $img1 . '" alt="" class="absolute inset-0 w-[362px] h-[362px] lg:w-[220px] lg:h-[220px] object-cover transition-opacity duration-300 group-hover:opacity-0" />
+                                <img src="public/assets/images/products/' . $img2 . '" alt="" class="absolute inset-0 w-[362px] h-[362px] lg:w-[220px] lg:h-[220px] object-cover transition-opacity duration-300 opacity-0 group-hover:opacity-100" />
+                            </div>
+                            <div class="px-2 pb-3 space-y-2">
+                                <p class="text-sm leading-snug line-clamp-2">' . htmlspecialchars($p['name']) . '</p>
+                            <div class="flex justify-start items-center gap-3 text-sm">';
+                        if ($discountPrice) {
+                            echo '<span class="font-semibold text-black">' . $discountPrice . 'đ</span>';
+                            echo '<span class="line-through text-gray-400">' . $price . 'đ</span>';
+                        } else {
+                            echo '<span class="font-semibold text-black">' . $price . 'đ</span>';
+                        }
+                        echo '</div>
+                            </div>
+                        </a>';
                     }
                     ?>
                 </div>
             </section>
+
+
         </div>
         <?php include_once 'views/partials/footer.php' ?>
     </main>
 
     <script src="public/assets/js/productDetail.js"></script>
+    <script>
+        let images = <?= json_encode(explode(',', $product['images'])) ?>.map(img => `public/assets/images/products/${img}`);
+
+        if (images.length === 2) {
+            images.push(images[0]);
+        }
+
+        const mainImage = document.getElementById("mainImage");
+        const thumbsDesktop = document.getElementById("thumbsDesktop");
+        const thumbsMobile = document.getElementById("thumbsMobile");
+        const dotsContainer = document.getElementById("dotsContainer");
+
+        let currentIndex = 0;
+        mainImage.src = images[currentIndex];
+
+        function renderImages() {
+            thumbsDesktop.innerHTML = "";
+            thumbsMobile.innerHTML = "";
+
+            images.forEach((src, i) => {
+                const thumbDesktop = document.createElement("img");
+                thumbDesktop.src = src;
+                thumbDesktop.className =
+                    "w-16 h-16 object-cover cursor-pointer border border-gray-300 hover:border-black";
+                thumbDesktop.onclick = () => changeImage(i);
+                thumbsDesktop.appendChild(thumbDesktop);
+
+                const thumbMobile = document.createElement("img");
+                thumbMobile.src = src;
+                thumbMobile.className =
+                    "w-16 h-16 object-cover cursor-pointer border border-gray-300 hover:border-black";
+                thumbMobile.onclick = () => changeImage(i);
+                thumbsMobile.appendChild(thumbMobile);
+            });
+        }
+
+        function renderDots() {
+            dotsContainer.innerHTML = "";
+
+            images.forEach((_, i) => {
+                const dot = document.createElement("button");
+                dot.id = `dot-${i}`;
+                dot.className = `w-2 h-2 rounded-full hover:bg-green-700 cursor-pointer ${
+                i === currentIndex ? "bg-gray-400" : "bg-gray-300"
+            }`;
+                dot.onclick = () => changeImage(i);
+                dotsContainer.appendChild(dot);
+            });
+        }
+
+        function changeImage(index) {
+            currentIndex = index;
+            mainImage.src = images[index];
+            updateDots();
+        }
+
+        function updateDots() {
+            images.forEach((_, i) => {
+                const dot = document.getElementById(`dot-${i}`);
+                if (dot) {
+                    dot.className = `w-2 h-2 rounded-full hover:bg-green-700 cursor-pointer ${
+                    i === currentIndex ? "bg-gray-400" : "bg-gray-300"
+                }`;
+                }
+            });
+        }
+
+        // Render on load
+        renderImages();
+        renderDots();
+    </script>
+
 </body>
 
 </html>

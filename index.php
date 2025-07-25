@@ -25,6 +25,11 @@ switch ($pg) {
             $productController->list($params);
         }
         break;
+    case 'search_products':
+        $keyword = $_GET['keyword'] ?? '';
+        $controller = new ProductController();
+        $controller->search($keyword);
+        break;
     case 'stores':
         $staticPageController = new StaticPageController();
         $staticPageController->stores();

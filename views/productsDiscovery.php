@@ -17,8 +17,6 @@
             <!-- Routing -->
             <section class="md:mt-6 mt-2 hidden md:flex justify-start items-center gap-3 w-full">
                 <a class="text-[13px]" href="index.php?pg=home">Trang chủ</a>
-                <span class="text-[13px] text-[#777777]">/</span>
-                <p class="text-[13px] text-[#777777]">Nữ | Women</p>
             </section>
 
             <!-- Slider -->
@@ -51,19 +49,19 @@
                                     </li>
                                     <li class="filter-option py-2 px-2 flex justify-start items-center gap-3 w-full"
                                         data-key="price"
-                                        data-value="100000>=&&<=250000">
+                                        data-value="100000&&250000">
                                         <div class="square w-3 h-3 border-[1px] border-gray-300"></div>
                                         <span class="text-sm">100,000đ - 250,000đ</span>
                                     </li>
                                     <li class="filter-option py-2 px-2 flex justify-start items-center gap-3 w-full"
                                         data-key="price"
-                                        data-value="250000>=&&<=500000">
+                                        data-value="250000&&500000">
                                         <div class="square w-3 h-3 border-[1px] border-gray-300"></div>
                                         <span class="text-sm">250,000đ - 500,000đ</span>
                                     </li>
                                     <li class="filter-option py-2 px-2 flex justify-start items-center gap-3 w-full"
                                         data-key="price"
-                                        data-value="500000>=&&<=800000">
+                                        data-value="500000&&800000">
                                         <div class="square w-3 h-3 border-[1px] border-gray-300"></div>
                                         <span class="text-sm">500,000đ - 800,000đ</span>
                                     </li>
@@ -188,27 +186,27 @@
                                 <ul class="flex flex-col justify-start items-start gap-1 w-full max-h-[200px] overflow-y-auto">
                                     <li class="filter-option py-2 px-2 flex justify-start items-center gap-3 w-full"
                                         data-key="order"
-                                        data-value="name:desc">
+                                        data-value="name-asc">
                                         <div class="square w-3 h-3 border-[1px] border-gray-300"></div>
                                         <span class="text-sm">Tên: A-Z</span>
                                     </li>
                                     <li class="filter-option py-2 px-2 flex justify-start items-center gap-3 w-full"
                                         data-key="order"
-                                        data-value="name:asc">
+                                        data-value="name-desc">
                                         <div class="square w-3 h-3 border-[1px] border-gray-300"></div>
                                         <span class="text-sm">Tên: Z-A</span>
                                     </li>
                                     <li class="filter-option py-2 px-2 flex justify-start items-center gap-3 w-full"
                                         data-key="order"
-                                        data-value="price:desc">
+                                        data-value="price-asc">
                                         <div class="square w-3 h-3 border-[1px] border-gray-300"></div>
-                                        <span class="text-sm">Giá: Giảm dần</span>
+                                        <span class="text-sm">Giá: Tăng dần</span>
                                     </li>
                                     <li class="filter-option py-2 px-2 flex justify-start items-center gap-3 w-full"
                                         data-key="order"
-                                        data-value="name:asc">
+                                        data-value="price-desc">
                                         <div class="square w-3 h-3 border-[1px] border-gray-300"></div>
-                                        <span class="text-sm">Giá: Tăng dần</span>
+                                        <span class="text-sm">Giá: Giảm dần</span>
                                     </li>
                                 </ul>
                             </div>
@@ -263,19 +261,19 @@
                             </li>
                             <li class="filter-option py-2 px-2 flex justify-start items-center gap-3 w-full"
                                 data-key="price"
-                                data-value="100000>=&&<=250000">
+                                data-value="100000&&250000">
                                 <div class="square w-3 h-3 border-[1px] border-gray-300"></div>
                                 <span class="text-sm">100,000đ - 250,000đ</span>
                             </li>
                             <li class="filter-option py-2 px-2 flex justify-start items-center gap-3 w-full"
                                 data-key="price"
-                                data-value="250000>=&&<=500000">
+                                data-value="250000&&500000">
                                 <div class="square w-3 h-3 border-[1px] border-gray-300"></div>
                                 <span class="text-sm">250,000đ - 500,000đ</span>
                             </li>
                             <li class="filter-option py-2 px-2 flex justify-start items-center gap-3 w-full"
                                 data-key="price"
-                                data-value="500000>=&&<=800000">
+                                data-value="500000&&800000">
                                 <div class="square w-3 h-3 border-[1px] border-gray-300"></div>
                                 <span class="text-sm">500,000đ - 800,000đ</span>
                             </li>
@@ -391,27 +389,27 @@
                     <ul class="flex flex-col justify-start items-start gap-1 w-full max-h-[200px] overflow-y-auto">
                         <li class="filter-option py-2 px-2 flex justify-start items-center gap-3 w-full"
                             data-key="order"
-                            data-value="name:desc">
+                            data-value="name-asc">
                             <div class="square w-3 h-3 border-[1px] border-gray-300"></div>
                             <span class="text-sm">Tên: A-Z</span>
                         </li>
                         <li class="filter-option py-2 px-2 flex justify-start items-center gap-3 w-full"
                             data-key="order"
-                            data-value="name:asc">
+                            data-value="name-desc">
                             <div class="square w-3 h-3 border-[1px] border-gray-300"></div>
                             <span class="text-sm">Tên: Z-A</span>
                         </li>
                         <li class="filter-option py-2 px-2 flex justify-start items-center gap-3 w-full"
                             data-key="order"
-                            data-value="price:desc">
+                            data-value="price-asc">
                             <div class="square w-3 h-3 border-[1px] border-gray-300"></div>
-                            <span class="text-sm">Giá: Giảm dần</span>
+                            <span class="text-sm">Giá: Tăng dần</span>
                         </li>
                         <li class="filter-option py-2 px-2 flex justify-start items-center gap-3 w-full"
                             data-key="order"
-                            data-value="name:asc">
+                            data-value="price-desc">
                             <div class="square w-3 h-3 border-[1px] border-gray-300"></div>
-                            <span class="text-sm">Giá: Tăng dần</span>
+                            <span class="text-sm">Giá: Giảm dần</span>
                         </li>
                     </ul>
                 </div>
@@ -419,68 +417,99 @@
 
             <!-- List product -->
             <section id="list-product" class="mt-10 flex flex-col justify-center items-center">
-                <!-- List products -->
-                <div class="grid-cols-5 gap-2 lg:grid hidden">
-                    <?php
-                    for ($i = 0; $i < 20; $i++) {
-                        echo '
-                <a href="index.php?pg=products&id=1" class="group space-y-2 hover:shadow-xs">
-                    <div class="relative w-full aspect-square overflow-hidden">
-                        <img src="public/assets/images/products/T-shirtFemale1-1.jpg"
-                            alt=""
-                            class="absolute inset-0 w-[362px] h-[362px] lg:w-[220px] lg:h-[220px] object-cover transition-opacity duration-300 group-hover:opacity-0" />
-                        <img src="public/assets/images/products/T-shirtFemale1-2.jpg"
-                            alt=""
-                            class="absolute inset-0 w-[362px] h-[362px] lg:w-[220px] lg:h-[220px] object-cover transition-opacity duration-300 opacity-0 group-hover:opacity-100" />
+
+                <?php if (empty($products)): ?>
+                    <div class="text-center text-gray-500 py-10">
+                        Không tìm thấy sản phẩm nào phù hợp.
                     </div>
-                    <div class="px-2 pb-3 space-y-2">
-                        <p class="text-sm leading-snug line-clamp-2">
-                            Áo thun tay dài màu CAM TIGER Degrey Jersey long sleeve cổ tim thời trang thể thao
-                        </p>
-                        <div class="flex justify-start items-center gap-3 text-sm">
-                            <span class="font-semibold text-black">400,000đ</span>
-                            <span class="line-through text-gray-400">450,000đ</span>
-                        </div>
+                <?php else: ?>
+
+                    <!-- Desktop layout -->
+                    <div class="grid-cols-5 gap-2 lg:grid hidden">
+                        <?php foreach ($products as $product): ?>
+                            <?php
+                            $images = explode(',', $product['images']);
+                            $image1 = $images[0] ?? 'default.jpg';
+                            $image2 = $images[1] ?? $image1;
+                            $price = number_format($product['price'], 0, ',', '.') . 'đ';
+                            $oldPrice = number_format($product['price'] * 1.1, 0, ',', '.') . 'đ';
+                            ?>
+                            <a href="index.php?pg=products&id=<?= $product['id'] ?>" class="group space-y-2 hover:shadow-xs">
+                                <div class="relative w-full aspect-square overflow-hidden">
+                                    <img src="public/assets/images/products/<?= $image1 ?>"
+                                        alt=""
+                                        class="absolute inset-0 w-[362px] h-[362px] lg:w-[220px] lg:h-[220px] object-cover transition-opacity duration-300 group-hover:opacity-0" />
+                                    <img src="public/assets/images/products/<?= $image2 ?>"
+                                        alt=""
+                                        class="absolute inset-0 w-[362px] h-[362px] lg:w-[220px] lg:h-[220px] object-cover transition-opacity duration-300 opacity-0 group-hover:opacity-100" />
+                                </div>
+                                <div class="px-2 pb-3 space-y-2">
+                                    <p class="text-sm leading-snug line-clamp-2">
+                                        <?= htmlspecialchars($product['name']) ?>
+                                    </p>
+                                    <div class="flex justify-start items-center gap-3 text-sm">
+                                        <span class="font-semibold text-black"><?= $price ?></span>
+                                        <span class="line-through text-gray-400"><?= $oldPrice ?></span>
+                                    </div>
+                                </div>
+                            </a>
+                        <?php endforeach; ?>
                     </div>
-                </a>
-            ';
-                    }
-                    ?>
-                </div>
-                <div class="grid grid-cols-2 gap-3 lg:hidden">
-                    <?php
-                    for ($i = 0; $i < 6; $i++) {
-                        echo '
-                <a href="index.php?pg=products&id=1" class="group space-y-2 hover:shadow-xs">
-                    <div class="relative w-full aspect-square overflow-hidden">
-                        <img src="public/assets/images/products/T-shirtFemale1-1.jpg"
-                            alt=""
-                            class="absolute inset-0 w-[362px] h-[362px] lg:w-[220px] lg:h-[220px] object-cover transition-opacity duration-300 group-hover:opacity-0" />
-                        <img src="public/assets/images/products/T-shirtFemale1-2.jpg"
-                            alt=""
-                            class="absolute inset-0 w-[362px] h-[362px] lg:w-[220px] lg:h-[220px] object-cover transition-opacity duration-300 opacity-0 group-hover:opacity-100" />
+
+                    <!-- Mobile layout -->
+                    <div class="grid grid-cols-2 gap-3 lg:hidden">
+                        <?php foreach (array_slice($products, 0, 6) as $product): ?>
+                            <?php
+                            $images = explode(',', $product['images']);
+                            $image1 = $images[0] ?? 'default.jpg';
+                            $image2 = $images[1] ?? $image1;
+                            $price = number_format($product['price'], 0, ',', '.') . 'đ';
+                            $oldPrice = number_format($product['price'] * 1.1, 0, ',', '.') . 'đ';
+                            ?>
+                            <a href="index.php?pg=products&id=<?= $product['id'] ?>" class="group space-y-2 hover:shadow-xs">
+                                <div class="relative w-full aspect-square overflow-hidden">
+                                    <img src="public/assets/images/products/<?= $image1 ?>"
+                                        alt=""
+                                        class="absolute inset-0 w-[362px] h-[362px] lg:w-[220px] lg:h-[220px] object-cover transition-opacity duration-300 group-hover:opacity-0" />
+                                    <img src="public/assets/images/products/<?= $image2 ?>"
+                                        alt=""
+                                        class="absolute inset-0 w-[362px] h-[362px] lg:w-[220px] lg:h-[220px] object-cover transition-opacity duration-300 opacity-0 group-hover:opacity-100" />
+                                </div>
+                                <div class="px-2 pb-3 space-y-2">
+                                    <p class="text-sm leading-snug line-clamp-2">
+                                        <?= htmlspecialchars($product['name']) ?>
+                                    </p>
+                                    <div class="flex justify-start items-center gap-3 text-sm">
+                                        <span class="font-semibold text-black"><?= $price ?></span>
+                                        <span class="line-through text-gray-400"><?= $oldPrice ?></span>
+                                    </div>
+                                </div>
+                            </a>
+                        <?php endforeach; ?>
                     </div>
-                    <div class="px-2 pb-3 space-y-2">
-                        <p class="text-sm leading-snug line-clamp-2">
-                            Áo thun tay dài màu CAM TIGER Degrey Jersey long sleeve cổ tim thời trang thể thao
-                        </p>
-                        <div class="flex justify-start items-center gap-3 text-sm">
-                            <span class="font-semibold text-black">400,000đ</span>
-                            <span class="line-through text-gray-400">450,000đ</span>
-                        </div>
-                    </div>
-                </a>
-            ';
-                    }
-                    ?>
-                </div>
+
+                <?php endif; ?>
+
             </section>
+
             <!-- Loading more -->
-            <section id="load-more" class="mt-8 w-full flex justify-center items-center">
-                <button class="py-2 min-w-[306px] border-[1px] border-gray-500 rounded-md text-gray-800 cursor-pointer">
-                    Xem thêm các sản phẩm tương tự
-                </button>
-            </section>
+            <?php if ($hasMore): ?>
+                <?php
+                $nextPage = $page + 1;
+                $queryParams = $_GET;
+                $queryParams['page'] = $nextPage;
+                $queryString = http_build_query($queryParams);
+                ?>
+                <section id="load-more" class="mt-8 w-full flex justify-center items-center">
+                    <a
+                        class="py-2 min-w-[306px] border-[1px] border-gray-500 rounded-md text-gray-800 cursor-pointer text-center"
+                        href="index.php?<?= htmlspecialchars($queryString) ?>">
+                        Xem thêm các sản phẩm tương tự
+                    </a>
+                </section>
+            <?php endif; ?>
+
+
         </div>
         <?php include_once 'views/partials/footer.php' ?>
     </main>

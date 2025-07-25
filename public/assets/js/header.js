@@ -34,9 +34,14 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
       suggestions.classList.add("hidden");
 
-      productList.innerHTML = `
-                    <p class="text-gray-500 mt-4">Không tìm thấy sản phẩm nào phù hợp.</p>
-                `;
+      fetch(`index.php?pg=search_products&keyword=${encodeURIComponent(value)}`)
+        .then((res) => res.text())
+        .then((html) => {
+          productList.innerHTML = html;
+        })
+        .catch(() => {
+          productList.innerHTML = `<p class="text-gray-500 mt-4">Không tìm thấy sản phẩm nào phù hợp.</p>`;
+        });
     }
   });
 });
@@ -101,7 +106,7 @@ document.addEventListener("DOMContentLoaded", function () {
     male: [
       {
         name: "Tất cả | All",
-        link: "index.php?pg=products&category=all&gender=male",
+        link: "index.php?pg=products&gender=male",
       },
       {
         name: "Áo thun | Tshirt",
@@ -127,7 +132,7 @@ document.addEventListener("DOMContentLoaded", function () {
     female: [
       {
         name: "Tất cả | All",
-        link: "index.php?pg=products&category=all&gender=female",
+        link: "index.php?pg=products&gender=female",
       },
       {
         name: "Áo thun | Tshirt",
@@ -146,16 +151,8 @@ document.addEventListener("DOMContentLoaded", function () {
         link: "index.php?pg=products&category=tanktop&gender=female",
       },
       {
-        name: "Áo thể thao | Sports Bras",
-        link: "index.php?pg=products&category=sports-bras&gender=female",
-      },
-      {
         name: "Quần | Pants & Shorts",
         link: "index.php?pg=products&category=pants-shorts&gender=female",
-      },
-      {
-        name: "Váy | Sports Skirts",
-        link: "index.php?pg=products&category=sport-skirts&gender=female",
       },
     ],
     accessory: [
@@ -169,12 +166,8 @@ document.addEventListener("DOMContentLoaded", function () {
       },
       { name: "Nón | Caps", link: "index.php?pg=products&category=cap" },
       {
-        name: "Mỹ phẩm | Cosmetics",
-        link: "index.php?pg=products&category=cosmetic",
-      },
-      {
         name: "Giày & Dép | Shoes & Sandals",
-        link: "index.php?pg=products&category=shoes_sandal",
+        link: "index.php?pg=products&category=shoes-sandal",
       },
     ],
     help: [
