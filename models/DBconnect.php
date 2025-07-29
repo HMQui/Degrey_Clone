@@ -18,7 +18,6 @@ class DB
         }
     }
 
-    // SELECT all
     public function query($sql)
     {
         $stmt = $this->conn->query($sql);

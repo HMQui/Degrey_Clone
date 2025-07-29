@@ -17,11 +17,25 @@
                 <span class="text-[13px] text-[#777777]">/</span>
                 <p class="text-[13px] text-[#777777]">Giỏ hàng</p>
             </section>
-            <section class="mt-10 grid grid-cols-5 md:gap-10 w-full">
+            <form class="mt-10 grid grid-cols-5 md:gap-10 w-full">
                 <div class="w-full h-fit md:col-span-3 col-span-5">
                     <h1 class="mb-3 text-3xl font-bold">Giỏ hàng của bạn</h1>
                     <hr class="w-full border-[1px] border-gray-300">
-                    <h2 class="mt-5 text-2xl text-gray-700">Giỏ hàng của bạn đang trống</h2>
+                    <div id="cartContainer"></div>
+                    <div id="customerInfo" class="mt-6 flex flex-col gap-4">
+                        <div>
+                            <label for="note" class="block mb-1 font-medium">Ghi chú</label>
+                            <textarea required id="note" rows="3" class="w-full p-2 border border-gray-300 rounded-md resize-none" placeholder="Ghi chú cho người bán..."></textarea>
+                        </div>
+                        <div>
+                            <label for="address" class="block mb-1 font-medium">Địa chỉ</label>
+                            <input required type="text" id="address" class="w-full p-2 border border-gray-300 rounded-md" placeholder="Nhập địa chỉ nhận hàng">
+                        </div>
+                        <div>
+                            <label for="phone" class="block mb-1 font-medium">Số điện thoại</label>
+                            <input required type="text" id="phone" class="w-full p-2 border border-gray-300 rounded-md" placeholder="Nhập số điện thoại">
+                        </div>
+                    </div>
                 </div>
                 <div class="md:px-10 md:mt-0 mt-3 px-3 md:mb-0 mb-5 w-full h-auto md:col-span-2 col-span-5">
                     <div class="w-full bg-white">
@@ -29,7 +43,7 @@
 
                         <div class="flex justify-between items-center text-sm font-semibold mb-3">
                             <span>Tổng tiền:</span>
-                            <span class="text-red-600 text-lg font-bold">0đ</span>
+                            <span class="text-red-600 text-lg font-bold" id="totalPrice">0đ</span>
                         </div>
 
                         <ul class="text-sm text-gray-700 list-disc pl-5 space-y-1 mb-3">
@@ -37,11 +51,11 @@
                             <li>Bạn cũng có thể nhập mã giảm giá ở trang thanh toán.</li>
                         </ul>
 
-                        <div class="text-sm text-red-700 bg-red-100 border border-red-200 rounded-md p-3 mb-4">
+                        <div class="text-sm text-red-700 bg-red-100 border border-red-200 rounded-md p-3 mb-4" id="textAlert">
                             Giỏ hàng của bạn hiện chưa đạt mức tối thiểu để thanh toán.
                         </div>
 
-                        <button class="w-full bg-gray-700 text-white font-bold py-2 rounded-md cursor-not-allowed" disabled>
+                        <button class="w-full bg-gray-700 text-white font-bold py-2 rounded-md cursor-not-allowed" id="btnPay" type="submit">
                             THANH TOÁN
                         </button>
 
@@ -51,10 +65,11 @@
                         </div>
                     </div>
                 </div>
-            </section>
+            </form>
         </div>
         <?php include_once 'views/partials/footer.php' ?>
     </main>
+    <script src="public/assets/js/cart.js"></script>
 </body>
 
 </html>

@@ -22,13 +22,23 @@ class ProductModel
         return $this->db->queryOneWithParams($sql, ['id' => $id]);
     }
 
+    public function getProductByVariantId($variantId)
+    {
+        $sql = "
+        SELECT p.*, pv.size
+        FROM products p
+        JOIN product_variants pv ON p.id = pv.product_id
+        WHERE pv.id = :variantId";
+
+        return $this->db->queryOneWithParams($sql, ['variantId' => $variantId]);
+    }
+
     public function getQuantityFollowSize($productId)
     {
         $sql = "SELECT * FROM product_variants WHERE product_id = :product_id";
 
         return $this->db->queryWithParams($sql, ['product_id' => $productId]);
     }
-
 
     public function getProductsByFilter($filters = [], $limit = null, $offset = null)
     {
@@ -147,5 +157,21 @@ class ProductModel
     {
         $sql = "DELETE FROM products WHERE id = :id";
         return $this->db->execute($sql, ['id' => $id]);
+    }
+
+    function updateProductVariantQuantity($productVariantId, $changeQuantity)
+    {
+        $db = new DB();
+
+        $sql = "UPDATE product_variants 
+            SET quantity = quantity + :change 
+            WHERE id = :id";
+
+        $params = [
+            ':change' => $changeQuantity,
+            ':id'     => $productVariantId
+        ];
+
+        return $db->execute($sql, $params);
     }
 }

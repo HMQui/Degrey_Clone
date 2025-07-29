@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
       suggestions.classList.add("hidden");
 
-      fetch(`index.php?pg=search_products&keyword=${encodeURIComponent(value)}`)
+      fetch(`index.php?pg=search-products&keyword=${encodeURIComponent(value)}`)
         .then((res) => res.text())
         .then((html) => {
           productList.innerHTML = html;
@@ -47,41 +47,37 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-  const cartToggle = document.getElementById("cart-toggle");
-  const cartMenu = document.getElementById("cart-menu");
-
-  cartToggle.addEventListener("click", function (e) {
-    e.stopPropagation();
-    cartMenu.classList.toggle("hidden");
-    cartMenu.classList.toggle("flex");
-  });
-
-  document.addEventListener("click", function (e) {
-    const isClickInside = cartToggle.contains(e.target);
-    if (!isClickInside) {
-      cartMenu.classList.add("hidden");
-      cartMenu.classList.remove("flex");
-    }
-  });
+  // const cartToggle = document.getElementById("cart-toggle");
+  // const cartMenu = document.getElementById("cart-menu");
+  // cartToggle.addEventListener("click", function (e) {
+  //   e.stopPropagation();
+  //   cartMenu.classList.toggle("hidden");
+  //   cartMenu.classList.toggle("flex");
+  // });
+  // document.addEventListener("click", function (e) {
+  //   const isClickInside = cartToggle.contains(e.target);
+  //   if (!isClickInside) {
+  //     cartMenu.classList.add("hidden");
+  //     cartMenu.classList.remove("flex");
+  //   }
+  // });
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-  const cartToggle = document.getElementById("cart-toggle-lg");
-  const cartMenu = document.getElementById("cart-menu-lg");
-
-  cartToggle.addEventListener("click", function (e) {
-    e.stopPropagation();
-    cartMenu.classList.toggle("hidden");
-    cartMenu.classList.toggle("flex");
-  });
-
-  document.addEventListener("click", function (e) {
-    const isClickInside = cartToggle.contains(e.target);
-    if (!isClickInside) {
-      cartMenu.classList.add("hidden");
-      cartMenu.classList.remove("flex");
-    }
-  });
+  // const cartToggle = document.getElementById("cart-toggle-lg");
+  // const cartMenu = document.getElementById("cart-menu-lg");
+  // cartToggle.addEventListener("click", function (e) {
+  //   e.stopPropagation();
+  //   cartMenu.classList.toggle("hidden");
+  //   cartMenu.classList.toggle("flex");
+  // });
+  // document.addEventListener("click", function (e) {
+  //   const isClickInside = cartToggle.contains(e.target);
+  //   if (!isClickInside) {
+  //     cartMenu.classList.add("hidden");
+  //     cartMenu.classList.remove("flex");
+  //   }
+  // });
 });
 
 // Cart mobile
@@ -226,3 +222,22 @@ function openNavbarMobile() {
 function closeNavbarMobile() {
   document.getElementById("navbarMobile").classList.add("hidden");
 }
+
+fetch("index.php?pg=get-cart")
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error("Lỗi mạng hoặc server không phản hồi.");
+    }
+    return response.json();
+  })
+  .then((data) => {
+    const cartQuantityElement = document.querySelectorAll(".cartItemQuantity");
+    if (cartQuantityElement) {
+      cartQuantityElement.forEach((c) => {
+        c.textContent = data.quantity;
+      });
+    }
+  })
+  .catch((error) => {
+    console.error("Lỗi khi lấy giỏ hàng:", error);
+  });

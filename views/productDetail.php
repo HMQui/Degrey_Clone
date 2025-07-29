@@ -122,7 +122,7 @@
                             <i class="fa-brands fa-facebook-messenger"></i>
                             <span>Chat ngay</span>
                         </a>
-                        <button class="col-span-2 text-white bg-[#2c2c2c] hover:bg-black cursor-pointer">Thêm vào giỏ</button>
+                        <button class="col-span-2 text-white bg-[#2c2c2c] hover:bg-black cursor-pointer" id="btnAddToCart">Thêm vào giỏ</button>
                     </div>
                     <div class="mt-9 flex justify-center items-center gap-3 w-full">
                         <div class="px-3 py-4 bg-[#ebece8a6] text-center text-sm font-bold">
@@ -297,8 +297,12 @@
         <?php include_once 'views/partials/footer.php' ?>
     </main>
 
+    <?php
+    $isLoggedIn = isset($_SESSION['user']);
+    ?>
     <script src="public/assets/js/productDetail.js"></script>
     <script>
+        const isLoggedIn = <?= json_encode($isLoggedIn) ?>;
         let images = <?= json_encode(explode(',', $product['images'])) ?>.map(img => `public/assets/images/products/${img}`);
 
         if (images.length === 2) {
@@ -368,6 +372,51 @@
         // Render on load
         renderImages();
         renderDots();
+
+        const btnAddToCart = document.getElementById('btnAddToCart');
+        const cartItemQuantity = document.querySelectorAll('.cartItemQuantity')
+
+        btnAddToCart.addEventListener('click', () => {
+            if (!isLoggedIn) {
+                alert('Bạn cần phải đăng nhập!');
+                return;
+            }
+            const quantityFollowSize = <?= json_encode($quantiyFollowSize) ?>;
+            let productVariantId;
+            let quantity = 1;
+            let size;
+
+            if (quantityFollowSize.length === 3) {
+                const btnSize = document.querySelectorAll('.size-btn');
+
+                btnSize.forEach((btn) => {
+                    if (btn.classList.contains('selected')) {
+                        size = btn.textContent.toLowerCase();
+                        return;
+                    }
+                })
+
+                quantityFollowSize.forEach(v => {
+                    if (v.size === size) {
+                        productVariantId = v.id;
+                        return;
+                    }
+                })
+            }
+            const data = new URLSearchParams();
+            data.append('productVariantId', productVariantId);
+            data.append('quantity', quantity);
+
+            fetch('index.php?pg=add-to-cart', {
+                    method: 'POST',
+                    body: data
+                })
+                .then(() => {
+                    cartItemQuantity.forEach(c => {
+                        c.textContent = parseInt(c.textContent) + 1;
+                    })
+                })
+        })
     </script>
 
 </body>

@@ -17,7 +17,7 @@
             <!-- White Sign In Box -->
             <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md">
                 <h1 class="text-3xl font-bold text-center mb-6">DEGREY</h1>
-                <form action="index.php?pg=login_submit" method="POST" class="space-y-6 bg-white rounded-lg w-full max-w-md mx-auto">
+                <form action="index.php?pg=login-submit" method="POST" class="space-y-6 bg-white rounded-lg w-full max-w-md mx-auto">
                     <div>
                         <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
                         <input
@@ -57,7 +57,9 @@
                         <a href="index.php?pg=sign-up" class="text-black hover:underline">Đăng ký ngay</a>
                     </p>
                 </form>
-
+                <?php if (!empty($helpText)): ?>
+                    <p class="text-right text-red-500"><?= htmlspecialchars($helpText) ?></p>
+                <?php endif; ?>
             </div>
         </div>
     </main>

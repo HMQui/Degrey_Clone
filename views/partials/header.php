@@ -126,15 +126,15 @@
                 <i class="fa-solid fa-magnifying-glass text-[#c5cee0]"></i>
                 <p class="text-gray-500">Tìm kiếm sản phẩm...</p>
             </button>
-            <div class="relative">
-                <button class="ml-5 cursor-pointer" id="cart-toggle">
+            <a class="relative" href="index.php?pg=cart">
+                <button class="ml-5 cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f">
                         <path d="M280-80q-33 0-56.5-23.5T200-160q0-33 23.5-56.5T280-240q33 0 56.5 23.5T360-160q0 33-23.5 56.5T280-80Zm400 0q-33 0-56.5-23.5T600-160q0-33 23.5-56.5T680-240q33 0 56.5 23.5T760-160q0 33-23.5 56.5T680-80ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
                     </svg>
-                    <div class="absolute top-[-10px] right-[-10px] w-5 h-5 bg-red-600 text-white text-xs rounded-full flex justify-center items-center">0</div>
+                    <div class="absolute top-[-10px] right-[-10px] w-5 h-5 bg-red-600 text-white text-xs rounded-full flex justify-center items-center cartItemQuantity">0</div>
                 </button>
                 <!-- Cart menu -->
-                <div id="cart-menu" class="hidden cursor-default p-5 absolute bottom-[-300px] right-[-50px] min-w-[420px] h-fit bg-white flex-col justify-start items-center z-[990] rounded-sm text-[#677279] shadow-[0_1px_5px_2px_rgba(0,0,0,0.1)]">
+                <!-- <div id="cart-menu" class="hidden cursor-default p-5 absolute bottom-[-300px] right-[-50px] min-w-[420px] h-fit bg-white flex-col justify-start items-center z-[990] rounded-sm text-[#677279] shadow-[0_1px_5px_2px_rgba(0,0,0,0.1)]">
                     <p class="text-[18px] text-black uppercase tracking-[0.5px] m-0 font-medium">Giỏ hàng</p>
                     <hr class="w-full my-1 border-gray-300">
                     <div class="mt-2 flex flex-col justify-start items-center">
@@ -158,9 +158,11 @@
 
                         <span class="absolute left-0 top-0 h-full w-0 bg-white z-10 transition-all duration-500 ease-in-out group-hover:w-full"></span>
                     </a>
-                </div>
-            </div>
-            <a class="ml-5" href="index.php?pg=sign-in">Đăng nhập</a>
+                </div> -->
+            </a>
+            <a class="ml-5" href="<?php echo isset($_SESSION['user']) ? 'index.php?pg=sign-out' : 'index.php?pg=sign-in'; ?>">
+                <?php echo isset($_SESSION['user']) ? 'Đăng xuất' : 'Đăng nhập'; ?>
+            </a>
         </div>
 
         <!-- For smaller divice -->
@@ -178,15 +180,15 @@
                 <i class="fa-solid fa-magnifying-glass text-[#c5cee0]"></i>
                 <p class="text-gray-500">Tìm kiếm sản phẩm...</p>
             </button>
-            <div class="relative lg:block hidden">
-                <button class="ml-5 cursor-pointer" id="cart-toggle-lg">
+            <a class="relative lg:block hidden" href="index.php?pg=cart">
+                <button class="ml-5 cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f">
                         <path d="M280-80q-33 0-56.5-23.5T200-160q0-33 23.5-56.5T280-240q33 0 56.5 23.5T360-160q0 33-23.5 56.5T280-80Zm400 0q-33 0-56.5-23.5T600-160q0-33 23.5-56.5T680-240q33 0 56.5 23.5T760-160q0 33-23.5 56.5T680-80ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
                     </svg>
-                    <div class="absolute top-[-10px] right-[-10px] w-5 h-5 bg-red-600 text-white text-xs rounded-full flex justify-center items-center">0</div>
+                    <div class="absolute top-[-10px] right-[-10px] w-5 h-5 bg-red-600 text-white text-xs rounded-full flex justify-center items-center cartItemQuantity">0</div>
                 </button>
                 <!-- Cart menu -->
-                <div id="cart-menu-lg" class="hidden cursor-default p-5 absolute bottom-[-300px] right-[-50px] min-w-[420px] h-fit bg-white flex-col justify-start items-center z-[990] rounded-sm text-[#677279] shadow-[0_1px_5px_2px_rgba(0,0,0,0.1)]">
+                <!-- <div id="cart-menu-lg" class="hidden cursor-default p-5 absolute bottom-[-300px] right-[-50px] min-w-[420px] h-fit bg-white flex-col justify-start items-center z-[990] rounded-sm text-[#677279] shadow-[0_1px_5px_2px_rgba(0,0,0,0.1)]">
                     <p class="text-[18px] text-black uppercase tracking-[0.5px] m-0 font-medium">Giỏ hàng</p>
                     <hr class="w-full my-1 border-gray-300">
                     <div class="mt-2 flex flex-col justify-start items-center">
@@ -210,22 +212,26 @@
 
                         <span class="absolute left-0 top-0 h-full w-0 bg-white z-10 transition-all duration-500 ease-in-out group-hover:w-full"></span>
                     </a>
-                </div>
-            </div>
-            <a class="ml-5 lg:block hidden" href="index.php?pg=sign-in">Đăng nhập</a>
+                </div> -->
+            </a>
+            <a class="ml-5 lg:block hidden" href="<?php echo isset($_SESSION['user']) ? 'index.php?pg=sign-out' : 'index.php?pg=sign-in'; ?>">
+                <?php echo isset($_SESSION['user']) ? 'Đăng xuất' : 'Đăng nhập'; ?>
+            </a>
 
-            <div class="lg:hidden flex justify-end items-center gap-4">
-                <button class="cursor-pointer" onclick="openSearchDialog()"><i class="fa-solid fa-magnifying-glass"></i></button>
+            <a class="lg:hidden flex justify-end items-center gap-4" href="index.php?pg=cart">
+                <button class="cursor-pointer"><i class="fa-solid fa-magnifying-glass"></i></button>
                 <div class="relative">
-                    <button class="cursor-pointer" onclick="openCartDialogMobie()">
+                    <button class="cursor-pointer">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f">
                             <path d="M280-80q-33 0-56.5-23.5T200-160q0-33 23.5-56.5T280-240q33 0 56.5 23.5T360-160q0 33-23.5 56.5T280-80Zm400 0q-33 0-56.5-23.5T600-160q0-33 23.5-56.5T680-240q33 0 56.5 23.5T760-160q0 33-23.5 56.5T680-80ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
                         </svg>
-                        <div class="absolute top-[-5px] right-[-7px] w-4 h-4 bg-red-600 text-white text-[10px] rounded-full flex justify-center items-center">0</div>
+                        <div class="absolute top-[-5px] right-[-7px] w-4 h-4 bg-red-600 text-white text-[10px] rounded-full flex justify-center items-center cartItemQuantity">0</div>
                     </button>
                 </div>
-                <a class="" href=" index.php?pg=sign-in">Đăng nhập</a>
-            </div>
+                <a class="lg:hidden" href="<?php echo isset($_SESSION['user']) ? 'index.php?pg=sign-out' : 'index.php?pg=sign-in'; ?>">
+                    <?php echo isset($_SESSION['user']) ? 'Đăng xuất' : 'Đăng nhập'; ?>
+                </a>
+            </a>
         </div>
     </header>
 
@@ -273,7 +279,7 @@
     </div>
 
     <!-- Cart Dialog Mobile -->
-    <div id="cartDialogMobile" class="fixed inset-0 z-[999] hidden">
+    <!-- <div id="cartDialogMobile" class="fixed inset-0 z-[999] hidden">
         <div onclick="closeCartDialogMobile()" class="absolute inset-0 bg-black/30 backdrop-blur-sm"></div>
 
         <div class="absolute bottom-0 left-0 right-0 w-full max-h-3/2 flex flex-col justify-start items-center gap-3">
@@ -287,7 +293,6 @@
                     <p class="cursor-pointer" onclick="closeCartDialogMobile()">Đóng</p>
                 </div>
                 <div class="max-h-[250px] overflow-y-scroll w-full flex justify-center items-center bg-white">
-                    <!-- Empty cart -->
                     <div class="my-5 flex flex-col justify-center items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#1f1f1f">
                             <path d="M286.79-81Q257-81 236-102.21t-21-51Q215-183 236.21-204t51-21Q317-225 338-203.79t21 51Q359-123 337.79-102t-51 21Zm400 0Q657-81 636-102.21t-21-51Q615-183 636.21-204t51-21Q717-225 738-203.79t21 51Q759-123 737.79-102t-51 21ZM235-741l110 228h288l125-228H235Zm-30-60h589.07q22.97 0 34.95 21 11.98 21-.02 42L694-495q-11 19-28.56 30.5T627-453H324l-56 104h491v60H277q-42 0-60.5-28t.5-63l64-118-152-322H51v-60h117l37 79Zm140 288h288-288Z" />
@@ -295,7 +300,6 @@
                         <p>hiện chưa có sản phẩm</p>
                     </div>
 
-                    <!-- List cart -->
                     <div class="hidden"></div>
                 </div>
                 <hr class="w-full my-1 border-gray-300">
@@ -310,7 +314,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- Navbar mobile -->
     <div id="navbarMobile" class="fixed inset-0 z-[999] hidden">

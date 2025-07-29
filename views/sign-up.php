@@ -18,12 +18,12 @@
             <div class="mt-7 bg-white rounded-lg shadow-lg p-8 w-full max-w-md">
                 <h1 class="text-3xl font-bold text-center mb-6">Đăng ký DEGREY</h1>
 
-                <form action="index.php?pg=sign_up_submit" method="POST" class="space-y-6 w-full">
+                <form action="index.php?pg=sign-up-submit" method="POST" class="space-y-6 w-full">
                     <div>
                         <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Họ và tên</label>
                         <input
                             type="text"
-                            name="name"
+                            name="full_name"
                             id="name"
                             required
                             placeholder="Nguyễn Văn A"
@@ -79,6 +79,23 @@
             </div>
         </div>
     </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const form = document.querySelector("form");
+            const password = document.getElementById("password");
+            const confirmPassword = document.getElementById("confirm_password");
+
+            form.addEventListener("submit", function(e) {
+                if (password.value !== confirmPassword.value) {
+                    e.preventDefault();
+                    alert("Mật khẩu và Nhập lại mật khẩu không khớp.");
+                    confirmPassword.focus();
+                }
+            });
+        });
+    </script>
+
 </body>
 
 </html>
