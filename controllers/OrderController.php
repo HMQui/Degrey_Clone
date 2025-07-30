@@ -6,30 +6,42 @@ class OrderController
 {
     public function index()
     {
+        $orderModel = new OrderModel();
+
+        $orders = [];
+        if (!isset($_SESSION['user'])) {
+            include 'views/checkOrders.php';
+            return;
+        }
+        $userId = $_SESSION['user']['id'];
+
+        $orders = $orderModel->getOrdersByUser($userId);
+
+        foreach ($orders as &$order) {
+            $items = $orderModel->getFullInfoOrderItemsByOrderId($order['id']);
+            $order['items'] = $items;
+        }
+        unset($order);
+
+
         include 'views/checkOrders.php';
     }
 
-    public function createOrder($data)
+    public function createOrder($address, $phoneNumber, $note)
     {
         $orderModel = new OrderModel();
-        $prooductModel = new ProductModel();
-        $cartModel = new CartModel();
+        $productModel = new ProductModel();
 
-        $userId = $_SESSION['user']['id'] ?? null;
-        if (!$userId) {
-            echo json_encode(['success' => false, 'message' => 'Người dùng chưa đăng nhập']);
-            return;
-        }
-
-        $cartItems = json_decode($data['cartItems'], true);
+        $userId = $_SESSION['user']['id'];
+        $cartItems = $_SESSION['cart'];
         $totalPrice = 0;
         $paramsItem = [];
 
         foreach ($cartItems as $item) {
-            $variantId = $item['product_variant_id'];
+            $variantId = $item['productVariantId'];
             $quantity = $item['quantity'];
 
-            $product = $item['product'];
+            $product = $productModel->getProductByVariantId($item['productVariantId']);
             $price = $product['price'];
             $discountPercent = $product['discount_percent'] ?? 0;
 
@@ -46,19 +58,14 @@ class OrderController
         $orderModel->createOrder(
             $userId,
             $totalPrice,
-            $data['address'],
-            $data['phone_number'],
-            $data['note'],
+            $address,
+            $phoneNumber,
+            $note,
             $paramsItem
         );
 
-        foreach ($paramsItem as $i) {
-            $prooductModel->updateProductVariantQuantity($i['productVariantId'], 0 - $i['quantity']);
-        }
+        $_SESSION['cart'] = [];
 
-        $cartModel->deleteCartByUserId($userId);
-
-        header('Content-Type: application/json');
-        echo json_encode(['success' => true, 'message' => 'Đặt hàng thành công']);
+        header('Location: index.php?pg=cart');
     }
 }

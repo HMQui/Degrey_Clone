@@ -12,6 +12,16 @@
 
 <body>
     <header class="fixed top-0 left-0 min-w-screen z-[99]">
+        <?php
+        $totalQuantity = 0;
+        if (isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
+            foreach ($_SESSION['cart'] as $item) {
+                if (isset($item['quantity'])) {
+                    $totalQuantity += $item['quantity'];
+                }
+            }
+        }
+        ?>
         <!-- For bigger divice -->
         <div class="xl:relative px-50 xl:flex xl:justify-center xl:items-center xl:min-h-[90px] hidden shadow-md bg-white">
             <a href="index.php?pg=home" class="mr-10">
@@ -131,7 +141,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f">
                         <path d="M280-80q-33 0-56.5-23.5T200-160q0-33 23.5-56.5T280-240q33 0 56.5 23.5T360-160q0 33-23.5 56.5T280-80Zm400 0q-33 0-56.5-23.5T600-160q0-33 23.5-56.5T680-240q33 0 56.5 23.5T760-160q0 33-23.5 56.5T680-80ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
                     </svg>
-                    <div class="absolute top-[-10px] right-[-10px] w-5 h-5 bg-red-600 text-white text-xs rounded-full flex justify-center items-center cartItemQuantity">0</div>
+                    <div class="absolute top-[-10px] right-[-10px] w-5 h-5 bg-red-600 text-white text-xs rounded-full flex justify-center items-center"><?= $totalQuantity ?></div>
                 </button>
                 <!-- Cart menu -->
                 <!-- <div id="cart-menu" class="hidden cursor-default p-5 absolute bottom-[-300px] right-[-50px] min-w-[420px] h-fit bg-white flex-col justify-start items-center z-[990] rounded-sm text-[#677279] shadow-[0_1px_5px_2px_rgba(0,0,0,0.1)]">
@@ -185,7 +195,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f">
                         <path d="M280-80q-33 0-56.5-23.5T200-160q0-33 23.5-56.5T280-240q33 0 56.5 23.5T360-160q0 33-23.5 56.5T280-80Zm400 0q-33 0-56.5-23.5T600-160q0-33 23.5-56.5T680-240q33 0 56.5 23.5T760-160q0 33-23.5 56.5T680-80ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
                     </svg>
-                    <div class="absolute top-[-10px] right-[-10px] w-5 h-5 bg-red-600 text-white text-xs rounded-full flex justify-center items-center cartItemQuantity">0</div>
+                    <div class="absolute top-[-10px] right-[-10px] w-5 h-5 bg-red-600 text-white text-xs rounded-full flex justify-center items-center"><?= $totalQuantity ?></div>
                 </button>
                 <!-- Cart menu -->
                 <!-- <div id="cart-menu-lg" class="hidden cursor-default p-5 absolute bottom-[-300px] right-[-50px] min-w-[420px] h-fit bg-white flex-col justify-start items-center z-[990] rounded-sm text-[#677279] shadow-[0_1px_5px_2px_rgba(0,0,0,0.1)]">
@@ -225,7 +235,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f">
                             <path d="M280-80q-33 0-56.5-23.5T200-160q0-33 23.5-56.5T280-240q33 0 56.5 23.5T360-160q0 33-23.5 56.5T280-80Zm400 0q-33 0-56.5-23.5T600-160q0-33 23.5-56.5T680-240q33 0 56.5 23.5T760-160q0 33-23.5 56.5T680-80ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
                         </svg>
-                        <div class="absolute top-[-5px] right-[-7px] w-4 h-4 bg-red-600 text-white text-[10px] rounded-full flex justify-center items-center cartItemQuantity">0</div>
+                        <div class="absolute top-[-5px] right-[-7px] w-4 h-4 bg-red-600 text-white text-[10px] rounded-full flex justify-center items-center"><?= $totalQuantity ?></div>
                     </button>
                 </div>
                 <a class="lg:hidden" href="<?php echo isset($_SESSION['user']) ? 'index.php?pg=sign-out' : 'index.php?pg=sign-in'; ?>">

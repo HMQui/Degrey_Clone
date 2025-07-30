@@ -3,6 +3,7 @@ const textAlert = document.getElementById("textAlert");
 const btnPay = document.getElementById("btnPay");
 var items;
 
+
 fetch("index.php?pg=get-cart")
   .then((response) => {
     if (!response.ok) {

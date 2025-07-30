@@ -222,22 +222,3 @@ function openNavbarMobile() {
 function closeNavbarMobile() {
   document.getElementById("navbarMobile").classList.add("hidden");
 }
-
-fetch("index.php?pg=get-cart")
-  .then((response) => {
-    if (!response.ok) {
-      throw new Error("Lỗi mạng hoặc server không phản hồi.");
-    }
-    return response.json();
-  })
-  .then((data) => {
-    const cartQuantityElement = document.querySelectorAll(".cartItemQuantity");
-    if (cartQuantityElement) {
-      cartQuantityElement.forEach((c) => {
-        c.textContent = data.quantity;
-      });
-    }
-  })
-  .catch((error) => {
-    console.error("Lỗi khi lấy giỏ hàng:", error);
-  });

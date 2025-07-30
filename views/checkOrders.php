@@ -29,64 +29,74 @@
                     <p class="text-[13px] text-[#777777]">Kiểm tra đơn hàng</p>
                 </section>
 
-                <section class="mt-10 grid grid-cols-3 md:gap-10 w-full">
+                <section class="mt-10 grid grid-cols-3 md:gap-10 w-full h-fit" id="ordersContiner">
                     <div class="w-full h-fit md:col-span-2 col-span-3">
-                        <h1 class="text-3xl font-bold">Kiểm tra đơn hàng</h1>
-                        <div class="mt-10 py-4 px-5 min-w-[445px] w-full max-h-[500px] overflow-y-auto bg-gray-200">
-                            <div class="py-4 px-5 m-auto bg-white w-full h-full rounded-md shadow-md">
-                                <!-- Header -->
-                                <div class="py-4 px-5 bg-gradient-to-b from-sky-400 to-blue-500 rounded-md">
-                                    <h2 class="text-center text-white font-bold text-lg">
-                                        🔍 Kiểm tra đơn hàng của bạn
-                                    </h2>
-                                </div>
-
-                                <!-- Form -->
-                                <form class="mt-5 space-y-4">
-                                    <!-- Phương thức kiểm tra -->
-                                    <div class="text-sm text-gray-700">Phương thức kiểm tra</div>
-                                    <div class="flex items-center gap-5">
-                                        <label class="flex items-center gap-2">
-                                            <input type="radio" name="method" checked class="accent-blue-500">
-                                            <span class="text-sm text-gray-800">Số điện thoại</span>
-                                        </label>
-                                        <label class="flex items-center gap-2">
-                                            <input type="radio" name="method" class="accent-blue-500">
-                                            <span class="text-sm text-gray-800">Email</span>
-                                        </label>
-                                    </div>
-
-                                    <!-- Input -->
-                                    <div>
-                                        <label class="block text-sm text-gray-700 mb-1" for="input-info">Số điện thoại:</label>
-                                        <input id="input-info" type="text" placeholder="0xx"
-                                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
-                                    </div>
-
-                                    <!-- Thông báo -->
-                                    <p class="text-xs text-gray-600">
-                                        Nếu quý khách có bất kỳ thắc mắc nào, xin vui lòng gọi DEGREY qua hotline
-                                        <span class="font-semibold text-blue-700">0336311117</span>
-                                    </p>
-
-                                    <!-- Button -->
-                                    <div class="text-right">
-                                        <button type="submit"
-                                            class="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-4 py-2 rounded-md transition-all">
-                                            Xem ngay
-                                        </button>
-                                    </div>
-
-                                    <!-- Lỗi -->
-                                    <div class="text-red-600 text-sm font-medium mt-2">
-                                        Không tìm thấy dữ liệu.
-                                    </div>
-                                </form>
+                        <?php if (count($orders) === 0): ?>
+                            <div class="mt-10 p-6 text-center bg-yellow-50 border-l-4 border-yellow-400 rounded-xl shadow-md">
+                                <p class="text-yellow-800 text-lg font-medium">Không tìm thấy đơn hàng nào.</p>
+                                <p class="text-sm text-gray-600 mt-2">Bạn chưa có đơn hàng nào hoặc dữ liệu không tồn tại.</p>
                             </div>
-                        </div>
+                        <?php else: ?>
+                            <?php foreach ($orders as $order): ?>
+                                <?php
+                                $statusColors = [
+                                    'pending' => 'border-yellow-400 bg-yellow-50',
+                                    'completed' => 'border-green-400 bg-green-50',
+                                    'canceled' => 'border-red-400 bg-red-50'
+                                ];
+                                $colorClass = $statusColors[$order['status']] ?? 'border-gray-300 bg-gray-50';
+                                ?>
+                                <div class="mt-10 border-l-4 <?= $colorClass ?> rounded-xl shadow-md p-6 transition-all">
+                                    <div class="mb-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
+                                        <div>
+                                            <h2 class="text-xl font-bold text-blue-700">Đơn hàng #<?= $order['id'] ?></h2>
+                                            <p class="text-gray-600 text-sm">Ngày đặt: <?= $order['created_at'] ?></p>
+                                            <p class="text-gray-600 text-sm">Trạng thái:
+                                                <span class="font-medium capitalize"><?= $order['status'] ?></span>
+                                            </p>
+                                        </div>
+                                        <div class="text-sm sm:text-right text-left">
+                                            <p><strong>Giao đến:</strong> <?= htmlspecialchars($order['address']) ?></p>
+                                            <p><strong>Điện thoại:</strong> <?= htmlspecialchars($order['phone_number']) ?></p>
+                                            <?php if (!empty($order['note'])): ?>
+                                                <p><strong>Ghi chú:</strong> <?= htmlspecialchars($order['note']) ?></p>
+                                            <?php endif; ?>
+                                            <p class="text-lg font-semibold text-red-600 mt-1">
+                                                Tổng tiền: <?= number_format($order['total_price'], 0, ',', '.') ?> đ
+                                            </p>
+                                        </div>
+                                    </div>
 
+                                    <div class="gap-5">
+                                        <?php foreach ($order['items'] as $item): ?>
+                                            <div class="mt-5 border rounded-xl bg-white shadow hover:shadow-lg transition p-4 flex flex-col w-full">
+                                                <div class="flex justify-start items-start">
+                                                    <img
+                                                        src="public/assets/images/products/<?= explode(',', $item['images'])[0] ?>"
+                                                        alt="<?= htmlspecialchars($item['name']) ?>"
+                                                        class="w-20 h-20 object-cover rounded-md mb-3">
+                                                    <div class="flex flex-col justify-start items-start ml-4">
+                                                        <h3 class="text-base font-semibold text-gray-800"><?= $item['name'] ?></h3>
+                                                        <div class="text-sm text-gray-500 mt-1">
+                                                            <p>Kích thước: <?= $item['size'] ?></p>
+                                                            <p>Màu: <?= $item['color'] ?></p>
+                                                            <p>Chất liệu: <?= $item['material'] ?></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="mt-auto pt-3 text-sm">
+                                                    <p>Giá lúc mua: <span class="font-semibold text-green-700"><?= number_format($item['price_at_order'], 0, ',', '.') ?> đ</span></p>
+                                                    <p>Số lượng: <?= $item['quantity'] ?></p>
+                                                </div>
+                                            </div>
+                                        <?php endforeach; ?>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
                     </div>
-                    <div class="md:px-10 md:mt-0 mt-3 px-3 md:mb-0 mb-5 w-full h-10 md:col-span-1 col-span-3">
+
+                    <div class="md:px-10 md:mt-0 mt-3 px-3 md:mb-0 mb-5 w-full h-10 md:col-span-1 col-span-3 h-full">
                         <h3 class="pb-5 text-[18px] font-bold border-b-[1px] border-gray-300">Danh mục page</h3>
                         <div class="pb-3 pt-3 border-b-[1px] border-gray-300">
                             <a class="text-[15px]" href="index.php?pg=products">SẢN PHẨM DEGREY</a>
@@ -109,6 +119,11 @@
             </div>
             <?php include_once 'views/partials/footer.php' ?>
         </main>
+
+        <script>
+            const orders = <?= json_encode($orders) ?>;
+            console.log(orders);
+        </script>
     </body>
 
     </html>

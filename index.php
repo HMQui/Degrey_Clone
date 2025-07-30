@@ -44,32 +44,28 @@ switch ($pg) {
         $orderController->index();
         break;
     case 'create-order':
-        $data = $_POST;
+        $address = $_POST['address'];
+        $phoneNumber = $_POST['phoneNumber'];
+        $note = $_POST['note'];
         $orderController = new OrderController();
-        $orderController->createOrder($data);
+        $orderController->createOrder($address, $phoneNumber, $note);
         break;
     case 'cart':
         $cartController = new CartController();
         $cartController->index();
         break;
     case 'add-to-cart':
-        $data = $_POST;
+        $productVariantId = $_POST['productVariantId'];
+        $productId = $_POST['productId'];
         $cartController = new CartController();
-        $cartController->addToCart($data);
-        break;
-    case 'get-cart':
-        $cartController = new CartController();
-        $cartController->getCart();
+        $cartController->addToCart($productVariantId, $productId);
         break;
     case 'update-cart-item':
-        $data = $_POST;
+        $productVariantId = $_POST['productVariantId'] ?? null;
+        $quantity = $_POST['quantity'] ?? 1;
+        $action = $_POST['action'] ?? null;
         $cartController = new CartController();
-        $cartController->updateCartItem($data);
-        break;
-    case 'delete-cart-item':
-        $data = $_POST;
-        $cartController = new CartController();
-        $cartController->deleteCartItem($data);
+        $cartController->updateCartItem($productVariantId, $quantity, $action);
         break;
     case 'sign-in':
         $authController = new AuthController();

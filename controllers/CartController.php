@@ -6,73 +6,61 @@ class CartController
 {
     public function index()
     {
+        $productModel = new ProductModel();
+        $cartItems = [];
+        $totalQuantity = 0;
+
+        if (!isset($_SESSION['cart']) || empty($_SESSION['cart'])) {
+            include 'views/cart.php';
+            return;
+        }
+        foreach ($_SESSION['cart'] as $productVariantId => $item) {
+            $totalQuantity += $item['quantity'];
+
+            $product = $productModel->getProductByVariantId($productVariantId);
+
+            $cartItems[] = [
+                'product_variant_id' => $productVariantId,
+                'quantity' => $item['quantity'],
+                'product' => $product
+            ];
+        }
         include 'views/cart.php';
     }
 
-    public function addToCart($data)
+    public function addToCart($productVariantId, $productId)
     {
-        $cartModel = new CartModel();
+        if (!isset($_SESSION['cart'])) {
+            $_SESSION['cart'] = [];
+        }
+        if (isset($_SESSION['cart'][$productVariantId])) {
+            $_SESSION['cart'][$productVariantId]['quantity'] += 1;
+        } else {
+            $_SESSION['cart'][$productVariantId] = [
+                'productVariantId' => $productVariantId,
+                'quantity' => 1
+            ];
+        }
 
-        $userId = '';
-        if (isset($_SESSION['user'])) {
-            $userId = $_SESSION['user']['id'];
-        } else return;
-
-        $cartModel->addOrUpdateItem($userId, $data['productVariantId'], $data['quantity']);
+        header('Location: index.php?pg=products&id=' . $productId);
     }
 
-    public function getCart()
+    public function updateCartItem($productVariantId, $quantity, $action)
     {
-        $cartModel = new CartModel();
-        $productModel = new ProductModel();
-        header('Content-Type: application/json');
-
-        if (!isset($_SESSION['user'])) {
-            echo json_encode([
-                'quantity' => 0,
-                'items' => []
-            ]);
+        if (!isset($_SESSION['cart']) || !isset($_SESSION['cart'][$productVariantId])) {
             return;
         }
 
-        $userId = $_SESSION['user']['id'];
-        $cart = $cartModel->getCartByUserId($userId);
-
-        if (!$cart) {
-            echo json_encode([
-                'quantity' => 0,
-                'items' => []
-            ]);
-            return;
+        if ($action === 'remove') {
+            unset($_SESSION['cart'][$productVariantId]);
+        } else {
+            if ($quantity > 0) {
+                $_SESSION['cart'][$productVariantId]['quantity'] = $quantity;
+            } else {
+                unset($_SESSION['cart'][$productVariantId]);
+            }
         }
 
-        $cartItems = $cartModel->getCartItems($cart['id']);
-        $quantity = 0;
-
-        foreach ($cartItems as &$item) {
-            $quantity += $item['quantity'];
-
-            $product = $productModel->getProductByVariantId($item['product_variant_id']);
-            $item['product'] = $product;
-        }
-
-        echo json_encode([
-            'quantity' => $quantity,
-            'items' => $cartItems
-        ]);
-    }
-
-    public function updateCartItem($data)
-    {
-        $cartModel = new CartModel();
-
-        $cartModel->updateItemQuantity($data['id'], $data['quantity']);
-    }
-
-    public function deleteCartItem($data)
-    {
-        $cartModel = new CartModel();
-
-        $cartModel->removeItem($data['id']);
+        header('Location: index.php?pg=cart');
     }
 }

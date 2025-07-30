@@ -73,7 +73,7 @@
                 </div>
 
                 <!-- Info -->
-                <div class="md:py-10 flex flex-col justify-start items-start">
+                <form class="md:py-10 flex flex-col justify-start items-start" id="addToCartForm" action="index.php?pg=add-to-cart" method="POST">
                     <h1 class="text-2xl font-bold">Áo thun tay dài màu CAM TIGER Degrey Jersey long sleeve cổ tim thời trang thể thao - LONGTIGER</h1>
                     <!-- Price -->
                     <div class="ml-3 mt-6 flex justify-start items-center">
@@ -101,28 +101,52 @@
                     </div>
                     <!-- Size options -->
                     <div class="mt-6 flex items-center">
+                        <?php
+                            echo '<input type="text" name="productId" value="'. $product['id'] .'" class="hidden">'
+                        ?>
                         <span class="text-sm">SIZE:</span>
                         <div id="sizeOptions" class="ml-30 flex space-x-3">
                             <?php
                             if (count($quantiyFollowSize) == 3) {
-                                echo '<button class="size-btn selected">S</button>';
-                                echo '<button class="size-btn">M</button>';
-                                echo '<button class="size-btn">L</button>';
+                                $idS = '';
+                                $idM = '';
+                                $idL = '';
+                                foreach ($quantiyFollowSize as $q) {
+                                    if ($q['size'] == 's') $idS = $q['id'];
+                                    else if ($q['size'] == 'm') $idM = $q['id'];
+                                    else $idL = $q['id'];
+                                }
+                                echo '
+                                    <input type="radio" id="s" name="productVariantId" value="'. $idS .'" class="hidden" checked>
+                                    <label for="s" class="size-btn selected">S</label><br>
+                                ';
+                                echo '
+                                    <input type="radio" id="m" name="productVariantId" value="'. $idM .'" class="hidden">
+                                    <label for="m" class="size-btn">M</label><br>
+                                ';
+                                echo '
+                                    <input type="radio" id="l" name="productVariantId" value="'. $idL .'" class="hidden">
+                                    <label for="l" class="size-btn">L</label><br>
+                                ';
                             } else {
                                 $sizeName = $quantiyFollowSize[0]['size'];
-                                echo '<button class="">' . htmlspecialchars($sizeName) . '</button>';
+                                echo '
+                                    <input type="radio" id="freesize" name="productVariantId" value="'. $quantiyFollowSize[0]['id'] .'" class="hidden" checked>
+                                    <label for="freesize" class="">' . htmlspecialchars($sizeName) . '</label><br>
+                                ';
                             }
                             ?>
                         </div>
                     </div>
 
                     <hr class="my-5 w-full border-gray-300">
+                    <!-- Button submit -->
                     <div class="grid grid-cols-3 w-full gap-3">
                         <a href="https://facebook.com" class="px-3 py-3 col-span-1 bg-[#ebece8a6] flex justify-center items-center gap-1">
                             <i class="fa-brands fa-facebook-messenger"></i>
                             <span>Chat ngay</span>
                         </a>
-                        <button class="col-span-2 text-white bg-[#2c2c2c] hover:bg-black cursor-pointer" id="btnAddToCart">Thêm vào giỏ</button>
+                        <button class="col-span-2 text-white bg-[#2c2c2c] hover:bg-black cursor-pointer" type="submit">Thêm vào giỏ</button>
                     </div>
                     <div class="mt-9 flex justify-center items-center gap-3 w-full">
                         <div class="px-3 py-4 bg-[#ebece8a6] text-center text-sm font-bold">
@@ -210,7 +234,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </form>
             </section>
 
             <hr class="mb-10 w-full border-gray-300">
@@ -373,49 +397,13 @@
         renderImages();
         renderDots();
 
-        const btnAddToCart = document.getElementById('btnAddToCart');
+        const addToCartForm = document.getElementById('addToCartForm');
         const cartItemQuantity = document.querySelectorAll('.cartItemQuantity')
 
-        btnAddToCart.addEventListener('click', () => {
-            if (!isLoggedIn) {
-                alert('Bạn cần phải đăng nhập!');
-                return;
-            }
-            const quantityFollowSize = <?= json_encode($quantiyFollowSize) ?>;
-            let productVariantId;
-            let quantity = 1;
-            let size;
-
-            if (quantityFollowSize.length === 3) {
-                const btnSize = document.querySelectorAll('.size-btn');
-
-                btnSize.forEach((btn) => {
-                    if (btn.classList.contains('selected')) {
-                        size = btn.textContent.toLowerCase();
-                        return;
-                    }
-                })
-
-                quantityFollowSize.forEach(v => {
-                    if (v.size === size) {
-                        productVariantId = v.id;
-                        return;
-                    }
-                })
-            }
-            const data = new URLSearchParams();
-            data.append('productVariantId', productVariantId);
-            data.append('quantity', quantity);
-
-            fetch('index.php?pg=add-to-cart', {
-                    method: 'POST',
-                    body: data
-                })
-                .then(() => {
-                    cartItemQuantity.forEach(c => {
-                        c.textContent = parseInt(c.textContent) + 1;
-                    })
-                })
+        addToCartForm.addEventListener('submit', () => {
+            console.log();
+            
+            
         })
     </script>
 

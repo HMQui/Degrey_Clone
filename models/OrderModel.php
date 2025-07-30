@@ -10,6 +10,21 @@ class OrderModel
         $this->db = new DB();
     }
 
+    public function getFullInfoOrderItemsByOrderId($orderId)
+    {
+        $sql = "
+        SELECT oi.order_id, oi.product_variant_id, oi.price_at_order, oi.quantity, pv.size, p.*
+        FROM orders o
+        INNER JOIN order_items oi ON o.id = oi.order_id
+        INNER JOIN product_variants pv ON oi.product_variant_id = pv.id
+        INNER JOIN products p ON p.id = pv.product_id
+        WHERE oi.order_id = :order_id 
+        ORDER BY o.created_at DESC
+    ";
+        return $this->db->queryWithParams($sql, [':order_id' => $orderId]);
+    }
+
+
     public function createOrder($userId, $totalPrice, $address = '', $phone_number = '', $note = '', $items = [], $status = 'pending')
     {
         $sql = "INSERT INTO orders (user_id, total_price, status, address, phone_number, note, created_at)
@@ -42,7 +57,6 @@ class OrderModel
 
         return $orderId;
     }
-
 
     public function getOrdersByUser($userId)
     {
