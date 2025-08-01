@@ -21,7 +21,6 @@
                 <h1 class="text-3xl font-normal">Quản lý sản phẩm</h1>
                 <div class="">
                     <button onclick="toggleDialogAddProduct(true)" class="py-2 px-4 rounded-md text-white bg-gradient-to-br from-[#667eea] to-[#764ba2] cursor-pointer">+ Thêm sản phẩm</button>
-                    <button class="py-2 px-4 rounded-md text-white bg-gradient-to-br from-[#667eea] to-[#764ba2] cursor-pointer">📤 Xuất file Excel</button>
                 </div>
             </div>
             <div class="mt-10 px-5 py-5 bg-white shadow-2xl rounded-xl flex flex-col justify-between items-center w-full">
