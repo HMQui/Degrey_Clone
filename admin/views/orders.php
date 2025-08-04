@@ -179,9 +179,12 @@
         function renderEditOrder(order) {
             const editForm = document.getElementById('editOrderForm');
 
+            const statusOrder = ['pending', 'confirmed', 'shipped', 'cancelled'];
+
             const html = `
                 <h2 class="text-xl font-semibold mb-4">Thay đổi thông tin</h2>
                 <input name='id' value="${order.id}" class="hidden"/>
+                
                 <!-- Phone Number -->
                 <div>
                     <label for="phone_number_edit" class="block text-sm font-medium text-gray-700">Số điện thoại</label>
@@ -208,13 +211,30 @@
                     <label for="status_edit" class="block text-sm font-medium text-gray-700">Loại</label>
                     <select name="status" id="status_edit" required 
                         class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500">
-                        <option value="pending" ${order.status === 'pending' ? 'selected' : ''}>Chờ xác nhận</option>
-                        <option value="confirmed" ${order.status === 'confirmed' ? 'selected' : ''}>Đang giao hàng</option>
-                        <option value="shipped" ${order.status === 'shipped' ? 'selected' : ''}>Đã nhận được hàng</option>
-                        <option value="cancelled" ${order.status === 'cancelled' ? 'selected' : ''}>Hủy</option>
+                        ${statusOrder.map(status => {
+                            const isSelected = order.status === status;
+                            const isBeforeCurrent = statusOrder.indexOf(status) < statusOrder.indexOf(order.status);
+                            const isCancelled = status === 'cancelled';
+                            const isShippedOrMore = ['shipped', 'cancelled'].includes(order.status);
+
+                            const shouldDisable = isBeforeCurrent || (isCancelled && isShippedOrMore);
+
+                            const label = status === 'pending' ? 'Chờ xác nhận' :
+                                        status === 'confirmed' ? 'Đang giao hàng' :
+                                        status === 'shipped' ? 'Đã nhận được hàng' :
+                                        'Hủy';
+
+                            return `
+                                <option value="${status}" 
+                                    ${isSelected ? 'selected' : ''} 
+                                    ${shouldDisable ? 'disabled' : ''}>
+                                    ${label}
+                                </option>
+                            `;
+                        }).join('')}
                     </select>
                 </div>
-            `
+            `;
 
             editForm.innerHTML = html;
         }

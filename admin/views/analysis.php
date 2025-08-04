@@ -43,7 +43,6 @@
         const topSellingProduct = <?= json_encode($topSellingProduct) ?>;
         const slowSellingProduct = <?= json_encode($slowSellingProduct) ?>;
         const topCustomer = <?= json_encode($topCustomer) ?>;        
-        console.log(topCustomer);
         
         google.charts.load('current', {
             packages: ['corechart']

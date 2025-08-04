@@ -69,11 +69,11 @@ class OrderController
         header('Location: index.php?pg=cart');
     }
 
-    public function cancelOrder($id)
+    public function changeStatusOrder($id, $status)
     {
         $orderModel = new OrderModel();
 
-        $orderModel->updateOrderStatus($id, 'cancelled');
+        $orderModel->updateOrderStatus($id, $status);
 
         header('Location: index.php?pg=check-orders');
     }

@@ -116,13 +116,24 @@
 
                                     <?php if ($order['status'] === 'pending'): ?>
                                         <!-- Form hủy đơn hàng -->
-                                        <form method="POST" action="index.php?pg=cancel-order" class="mt-5">
+                                        <form method="POST" action="index.php?pg=change-status-order" class="mt-5">
                                             <input type="hidden" name="id" value="<?= $order['id'] ?>">
+                                            <input type="hidden" name="status" value="cancelled">
                                             <button type="submit" class="py-2 px-4 bg-red-500 text-white rounded-md hover:bg-red-600 transition">
                                                 Hủy đơn hàng
                                             </button>
                                         </form>
+                                    <?php elseif ($order['status'] === 'confirmed'): ?>
+                                        <!-- Form xác nhận đã nhận hàng -->
+                                        <form method="POST" action="index.php?pg=change-status-order" class="mt-5">
+                                            <input type="hidden" name="id" value="<?= $order['id'] ?>">
+                                            <input type="hidden" name="status" value="shipped">
+                                            <button type="submit" class="py-2 px-4 bg-green-500 text-white rounded-md hover:bg-green-600 transition">
+                                                Đã nhận được hàng
+                                            </button>
+                                        </form>
                                     <?php endif; ?>
+
                                 </div>
                             <?php endforeach; ?>
 

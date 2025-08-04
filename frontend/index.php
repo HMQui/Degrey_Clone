@@ -48,10 +48,11 @@ switch ($pg) {
         $orderController = new OrderController();
         $orderController->index();
         break;
-    case 'cancel-order':
+    case 'change-status-order':
         $orderController = new OrderController();
         $id = $_POST['id'];
-        $orderController->cancelOrder($id);
+        $status = $_POST['status'];
+        $orderController->changeStatusOrder($id, $status);
         break;
     case 'create-order':
         $address = $_POST['address'];
